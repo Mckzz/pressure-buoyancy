@@ -14,8 +14,8 @@ clean.dat$cm <- as.numeric(clean.dat$cm)
 clean.dat$V <- as.numeric(clean.dat$V)
 
 clean.dat <- clean.dat %>% 
-  mutate(V = replace(V, V < -0.5, NA)) %>%
-  mutate(V = replace(V, V > 0.5, NA))
+  mutate(V = replace(V, V < -0.11, NA)) %>%
+  mutate(V = replace(V, V > 0.11, NA))
 
 print(clean.dat, n=400)
 view(clean.dat)
