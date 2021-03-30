@@ -1,9 +1,9 @@
 library(tidyverse)
 library(ggplot2)
 
-rm(Moch_pH_standards_profile)
+rm(Moch_pH_standards_profile_post)
 
-std <- Moch_pH_standards_profile %>% 
+std <- Moch_pH_standards_profile_post %>% 
   mutate_at(vars(pH, larva, min), factor)
 
 print(std)

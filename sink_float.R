@@ -1,18 +1,17 @@
 library(tidyverse)
 library(ggplot2)
 
+head(larva_1_velocities)
 
+clean.dat <- larva_1_velocities %>% 
+  mutate(across(where(is.character), ~na_if(., "#VALUE!"))) %>%   #what do the tildes do?
+  mutate(across(where(is.character), ~na_if(., "-")))%>%
+  mutate(across(where(is.character), as.double))
 
-rm(larva_3)
+head(clean.dat)
+view(clean.dat)
 
-
-clean.dat <- X2021_03_12_larva_4 %>% 
-  mutate(V = na_if(V, "#VALUE!")) %>% 
-  mutate(cm = na_if(cm, "-"))
-
-clean.dat$cm <- as.numeric(clean.dat$cm)
-clean.dat$V <- as.numeric(clean.dat$V)
-
+#velocity filter
 clean.dat <- clean.dat %>% 
   mutate(V = replace(V, V < -0.11, NA)) %>%
   mutate(V = replace(V, V > 0.11, NA))
@@ -22,4 +21,3 @@ view(clean.dat)
 
 ggplot(data = clean.dat, aes(x= s, y= V), na.rm= T) +
          geom_line()
-       
